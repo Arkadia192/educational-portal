@@ -14,3 +14,5 @@ template to fill later and keep track of what i did. So i don't forget later.
 - initialization through https://start.spring.io/
 - planning of file structure
 - research on database selection (will go for sqlite or mysql)
+- tested the project with test controller/service
+- Added global error handler
