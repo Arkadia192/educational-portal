@@ -1,6 +1,8 @@
 package com.berk.education_portal.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -8,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Getter @Setter
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,47 +40,6 @@ public class Course {
     private LocalDateTime updatedAt;
 
     // Functions:
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getCreditHours() {
-        return creditHours;
-    }
-
-    public void setCreditHours(int creditHours) {
-        this.creditHours = creditHours;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
 
     public void addStudent(Student student) {
         this.students.add(student);
