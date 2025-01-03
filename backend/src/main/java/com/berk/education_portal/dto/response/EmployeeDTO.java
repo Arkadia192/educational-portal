@@ -1,18 +1,9 @@
-package com.berk.education_portal.entity;
+package com.berk.education_portal.dto.response;
 
-import jakarta.persistence.*;
-
-@Entity
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class EmployeeDTO {
     private Long id;
-
     private String name;
-
-    @ManyToOne
-    @JoinColumn(name = "department_id")
-    private Department department;
+    private DepartmentDTO department;
 
     public Long getId() {
         return id;
@@ -30,11 +21,11 @@ public class Employee {
         this.name = name;
     }
 
-    public Department getDepartment() {
+    public DepartmentDTO getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(DepartmentDTO department) {
         this.department = department;
     }
 }

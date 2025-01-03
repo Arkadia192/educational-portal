@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    // TODO: add different exceptions.
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGlobalException(Exception ex) {
-        return new ResponseEntity<String>("Something went horribly wrong!", HttpStatus.I_AM_A_TEAPOT);
+        return new ResponseEntity<String>("Something went horribly wrong!", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
