@@ -1,7 +1,10 @@
 package com.berk.education_portal.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -11,17 +14,29 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String name;
 
+    @Column(length = 500)
+    private String description;
+
     @OneToMany(mappedBy = "department")
-    private List<Employee> employeeList;
+    private List<Employee> employees;
+
+    @OneToMany(mappedBy = "department")
+    private List<Course> courses;
+
+    @Column(updatable = false)
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
+    // Functions:
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -32,11 +47,27 @@ public class Department {
         this.name = name;
     }
 
-    public List<Employee> getEmployeeList() {
-        return employeeList;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEmployeeList(List<Employee> employeeList) {
-        this.employeeList = employeeList;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void addEmployee(Employee employee) {
+        this.employees.add(employee);
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void addCourses(Course course) {
+        this.courses.add(course);
     }
 }
