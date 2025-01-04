@@ -6,18 +6,16 @@ import com.berk.education_portal.dto.response.DepartmentDetailDTO;
 import com.berk.education_portal.entity.Department;
 import com.berk.education_portal.repository.DepartmentRepository;
 import com.berk.education_portal.util.ObjectConverter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class DepartmentService {
     private final DepartmentRepository departmentRepository;
-
-    public DepartmentService(DepartmentRepository departmentRepository) {
-        this.departmentRepository = departmentRepository;
-    }
 
     public List<DepartmentDTO> getAllDepartments() {
         return departmentRepository.findAll()
@@ -33,10 +31,7 @@ public class DepartmentService {
     }
 
     public DepartmentDTO createDepartment(DepartmentRequestDTO departmentRequestDTO) {
-        Department department = new Department();
-        department.setName(departmentRequestDTO.getName());
-        department.setDescription(departmentRequestDTO.getDescription());
-
+        Department department = ObjectConverter.convertDepartmentRequestToEntity(departmentRequestDTO);
         Department savedDepartment = departmentRepository.save(department);
         return ObjectConverter.convertDepartmentToListingDTO(savedDepartment);
     }

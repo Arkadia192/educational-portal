@@ -10,7 +10,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

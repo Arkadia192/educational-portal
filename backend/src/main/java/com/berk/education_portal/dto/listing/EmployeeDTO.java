@@ -2,13 +2,11 @@ package com.berk.education_portal.dto.listing;
 
 import com.berk.education_portal.entity.Employee;
 import com.berk.education_portal.util.EmployeeRole;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@AllArgsConstructor
 public class EmployeeDTO {
     private Long id;
     private String firstName;
