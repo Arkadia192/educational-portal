@@ -13,7 +13,7 @@ public class CourseDetailDTO {
     private Long id;
     private String name;
     private String description;
-    private int creditHours;
+    private Integer creditHours;
     private DepartmentDTO department;
     private List<StudentDTO> students;
 }

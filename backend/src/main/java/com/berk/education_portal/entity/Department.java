@@ -2,6 +2,7 @@ package com.berk.education_portal.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Department {
 
     @Id
@@ -38,6 +40,11 @@ public class Department {
     private LocalDateTime updatedAt;
 
     // Functions:
+
+    public Department(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
 
     public void addEmployee(Employee employee) {
         this.employees.add(employee);

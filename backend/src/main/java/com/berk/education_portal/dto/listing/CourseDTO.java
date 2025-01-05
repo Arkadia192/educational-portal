@@ -9,7 +9,7 @@ import lombok.Setter;
 public class CourseDTO {
     private Long id;
     private String name;
-    private int creditHours;
+    private Integer creditHours;
 
     public CourseDTO(Course course) {
         id = course.getId();

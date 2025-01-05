@@ -2,6 +2,7 @@ package com.berk.education_portal.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,7 @@ public class Course {
     private String description;
 
     @Column(nullable = false)
-    private int creditHours;
+    private Integer creditHours;
 
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
@@ -41,6 +43,12 @@ public class Course {
     private LocalDateTime updatedAt;
 
     // Functions:
+
+    public Course(String name, String description, Integer creditHours) {
+        this.name = name;
+        this.description = description;
+        this.creditHours = creditHours;
+    }
 
     public void addStudent(Student student) {
         this.students.add(student);

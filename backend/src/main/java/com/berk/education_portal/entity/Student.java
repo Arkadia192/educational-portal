@@ -3,6 +3,7 @@ package com.berk.education_portal.entity;
 import com.berk.education_portal.util.StudentStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +51,12 @@ public class Student {
     private LocalDateTime updatedAt;
 
     // Functions:
+
+    public Student(String firstName, String lastName, List<Course> courses) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.courses = courses;
+    }
 
     public String getFullName() {
         return firstName + " " + lastName;

@@ -8,6 +8,6 @@ import lombok.Setter;
 public class CourseRequestDTO {
     private String name;
     private String description;
-    private int creditHours;
+    private Integer creditHours;
     private Long departmentId;
 }
