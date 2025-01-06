@@ -40,21 +40,27 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
     };
 
     return (
-        <div className="modal show" tabIndex="-1" style={{ display: "block" }}>
-            <div className="modal-dialog">
-                <div className="modal-content">
-                    <div className="modal-header">
+        <div className="modal fade show d-block" style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} tabIndex="-1" role="dialog">
+            <div className="modal-dialog modal-dialog-centered" role="document">
+                <div className="modal-content shadow-lg border-0 rounded">
+                    <div className="modal-header bg-primary text-white">
                         <h5 className="modal-title">Update Employee</h5>
-                        <button type="button" className="close" onClick={() => onClose(null)}>
-                            <span>&times;</span>
-                        </button>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            onClick={() => onClose(null)}
+                            aria-label="Close"
+                        ></button>
                     </div>
-                    <div className="modal-body">
+                    <div className="modal-body p-4">
                         <form onSubmit={handleSubmit}>
-                            <div className="form-group">
-                                <label>First Name</label>
+                            <div className="mb-3">
+                                <label htmlFor="firstName" className="form-label">
+                                    First Name
+                                </label>
                                 <input
                                     type="text"
+                                    id="firstName"
                                     name="firstName"
                                     className="form-control"
                                     value={employeeData.firstName}
@@ -62,10 +68,13 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
                                     required
                                 />
                             </div>
-                            <div className="form-group">
-                                <label>Last Name</label>
+                            <div className="mb-3">
+                                <label htmlFor="lastName" className="form-label">
+                                    Last Name
+                                </label>
                                 <input
                                     type="text"
+                                    id="lastName"
                                     name="lastName"
                                     className="form-control"
                                     value={employeeData.lastName}
@@ -73,10 +82,13 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
                                     required
                                 />
                             </div>
-                            <div className="form-group">
-                                <label>Email</label>
+                            <div className="mb-3">
+                                <label htmlFor="email" className="form-label">
+                                    Email
+                                </label>
                                 <input
                                     type="email"
+                                    id="email"
                                     name="email"
                                     className="form-control"
                                     value={employeeData.email}
@@ -84,19 +96,25 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
                                     required
                                 />
                             </div>
-                            <div className="form-group">
-                                <label>Phone Number</label>
+                            <div className="mb-3">
+                                <label htmlFor="phoneNumber" className="form-label">
+                                    Phone Number
+                                </label>
                                 <input
                                     type="text"
+                                    id="phoneNumber"
                                     name="phoneNumber"
                                     className="form-control"
                                     value={employeeData.phoneNumber}
                                     onChange={handleInputChange}
                                 />
                             </div>
-                            <div className="form-group">
-                            <label>Role</label>
+                            <div className="mb-3">
+                                <label htmlFor="role" className="form-label">
+                                    Role
+                                </label>
                                 <select
+                                    id="role"
                                     name="role"
                                     className="form-control"
                                     value={employeeData.role}
@@ -106,7 +124,7 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
                                     <option value="ADMIN">Admin</option>
                                     <option value="INSTRUCTOR">Instructor</option>
                                     <option value="STAFF">Staff</option>
-                                    <option value="HR">Hr</option>
+                                    <option value="HR">HR</option>
                                     <option value="MANAGER">Manager</option>
                                 </select>
                             </div>

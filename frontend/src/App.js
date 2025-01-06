@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import DepartmentList from "./pages/DepartmentList";
 import CourseList from "./pages/CourseList";
 import WelcomePage from "./components/WelcomePage";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
   return (
