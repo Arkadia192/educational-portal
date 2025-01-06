@@ -1,30 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { updateEmployee } from "../services/api"; // Assuming API service for updating employee
+import React, { useState } from "react";
+import { createStudent } from "../../services/api"; // Assuming you have an API call for creating students
 
-const UpdateEmployeeForm = ({ employee, onClose }) => {
-    const [employeeData, setEmployeeData] = useState({
+const CreateStudentForm = ({ courseId, onClose }) => {
+    const [studentData, setStudentData] = useState({
         firstName: "",
         lastName: "",
         email: "",
-        phoneNumber: "",
-        role: "",
+        status: "ACTIVE", // Default status
+        courseId,
     });
-
-    useEffect(() => {
-        if (employee) {
-            setEmployeeData({
-                firstName: employee.firstName,
-                lastName: employee.lastName,
-                email: employee.email,
-                phoneNumber: employee.phoneNumber,
-                role: employee.role,
-            });
-        }
-    }, [employee]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setEmployeeData((prevData) => ({
+        setStudentData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
@@ -32,11 +20,11 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateEmployee(employee.id, employeeData)
-            .then((updatedEmployee) => {
-                onClose(updatedEmployee);
+        createStudent(studentData)
+            .then(() => {
+                onClose(); // Close the modal on success
             })
-            .catch((error) => console.error("Error updating employee:", error));
+            .catch((error) => console.error("Error creating student:", error));
     };
 
     return (
@@ -44,8 +32,8 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Update Employee</h5>
-                        <button type="button" className="close" onClick={() => onClose(null)}>
+                        <h5 className="modal-title">Add New Student</h5>
+                        <button type="button" className="close" onClick={onClose}>
                             <span>&times;</span>
                         </button>
                     </div>
@@ -57,7 +45,7 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
                                     type="text"
                                     name="firstName"
                                     className="form-control"
-                                    value={employeeData.firstName}
+                                    value={studentData.firstName}
                                     onChange={handleInputChange}
                                     required
                                 />
@@ -68,7 +56,7 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
                                     type="text"
                                     name="lastName"
                                     className="form-control"
-                                    value={employeeData.lastName}
+                                    value={studentData.lastName}
                                     onChange={handleInputChange}
                                     required
                                 />
@@ -79,39 +67,28 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
                                     type="email"
                                     name="email"
                                     className="form-control"
-                                    value={employeeData.email}
+                                    value={studentData.email}
                                     onChange={handleInputChange}
                                     required
                                 />
                             </div>
                             <div className="form-group">
-                                <label>Phone Number</label>
-                                <input
-                                    type="text"
-                                    name="phoneNumber"
-                                    className="form-control"
-                                    value={employeeData.phoneNumber}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            <div className="form-group">
-                            <label>Role</label>
+                                <label>Status</label>
                                 <select
-                                    name="role"
+                                    name="status"
                                     className="form-control"
-                                    value={employeeData.role}
+                                    value={studentData.status}
                                     onChange={handleInputChange}
                                     required
                                 >
-                                    <option value="ADMIN">Admin</option>
-                                    <option value="INSTRUCTOR">Instructor</option>
-                                    <option value="STAFF">Staff</option>
-                                    <option value="HR">Hr</option>
-                                    <option value="MANAGER">Manager</option>
+                                    <option value="ACTIVE">Active</option>
+                                    <option value="GRADUATED">Graduated</option>
+                                    <option value="DROPPED_OUT">Dropped Out</option>
+                                    <option value="FROZEN">Frozen</option>
                                 </select>
                             </div>
                             <button type="submit" className="btn btn-primary mt-3">
-                                Update Employee
+                                Add Student
                             </button>
                         </form>
                     </div>
@@ -121,4 +98,4 @@ const UpdateEmployeeForm = ({ employee, onClose }) => {
     );
 };
 
-export default UpdateEmployeeForm;
+export default CreateStudentForm;

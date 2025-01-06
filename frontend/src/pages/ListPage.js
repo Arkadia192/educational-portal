@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import EmployeeModal from "../components/EmployeeModal";
 import StudentModal from "../components/StudentModal";
-import CreateDepartmentForm from "../components/CreateDepartmentForm";
-import UpdateDepartmentForm from "../components/UpdateDepartmentForm";
-import CreateCourseForm from "../components/CreateCourseForm";
-import UpdateCourseForm from "../components/UpdateCourseForm";
-import CreateEmployeeForm from "../components/CreateEmployeeForm";
-import UpdateEmployeeForm from "../components/UpdateEmployeeForm";
-import CreateStudentForm from "../components/CreateStudentForm";
-import UpdateStudentForm from "../components/UpdateStudentForm";
+import CreateDepartmentForm from "../components/createForms/CreateDepartmentForm";
+import UpdateDepartmentForm from "../components/updateForms/UpdateDepartmentForm";
+import CreateCourseForm from "../components/createForms/CreateCourseForm";
+import UpdateCourseForm from "../components/updateForms/UpdateCourseForm";
+import CreateEmployeeForm from "../components/createForms/CreateEmployeeForm";
+import UpdateEmployeeForm from "../components/updateForms/UpdateEmployeeForm";
+import CreateStudentForm from "../components/createForms/CreateStudentForm";
+import UpdateStudentForm from "../components/updateForms/UpdateStudentForm";
 import {
   deleteDepartment,
   deleteCourse,
@@ -265,7 +265,7 @@ const ListPage = ({
                       {title === "Courses" && (
                         <button
                           onClick={() => handleAddStudentClick(item.id)} // Add student button
-                          className="btn btn-sm btn-outline-info mx-1"
+                          className="create-button btn btn-sm btn-outline-info mx-1"
                         >
                           ➕ Add Student
                         </button>

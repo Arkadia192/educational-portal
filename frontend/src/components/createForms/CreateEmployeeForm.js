@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createEmployee } from "../services/api"; // Assuming you have an API call for creating employees
+import { createEmployee } from "../../services/api"; // Assuming you have an API call for creating employees
 
 const CreateEmployeeForm = ({ departmentId, onClose }) => {
     const [employeeData, setEmployeeData] = useState({

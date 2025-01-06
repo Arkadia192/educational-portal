@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { updateStudent } from "../services/api"; // Assuming API service for updating students
+import { updateStudent } from "../../services/api"; // Assuming API service for updating students
 
 const UpdateStudentForm = ({ student, onClose }) => {
     const [studentData, setStudentData] = useState({

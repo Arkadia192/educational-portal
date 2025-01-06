@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { updateDepartment } from "../services/api";
+import { updateDepartment } from "../../services/api";
 
 const UpdateDepartmentForm = ({ department, onClose }) => {
     const [name, setName] = useState(department.name);

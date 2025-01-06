@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addCourse } from "../services/api";
+import { addCourse } from "../../services/api";
 
 const CreateCourseForm = ({ onClose }) => {
     const [name, setName] = useState("");
