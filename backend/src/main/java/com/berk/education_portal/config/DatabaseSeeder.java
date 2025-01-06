@@ -69,7 +69,6 @@ public class DatabaseSeeder implements CommandLineRunner {
                 course.setName(name);
                 course.setDescription("Description for " + name);
                 course.setCreditHours(random.nextInt(4) + 2); // Random between 2 and 5
-                course.setDepartment(allDepartments.get(random.nextInt(allDepartments.size())));
                 courseRepository.save(course);
             }
         }

@@ -29,9 +29,6 @@ public class Department {
     @OneToMany(mappedBy = "department")
     private List<Employee> employees;
 
-    @OneToMany(mappedBy = "department")
-    private List<Course> courses;
-
     @Column(updatable = false)
     @CreationTimestamp
     private LocalDateTime createdAt;
@@ -50,7 +47,4 @@ public class Department {
         this.employees.add(employee);
     }
 
-    public void addCourses(Course course) {
-        this.courses.add(course);
-    }
 }

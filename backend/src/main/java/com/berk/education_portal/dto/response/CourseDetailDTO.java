@@ -14,6 +14,5 @@ public class CourseDetailDTO {
     private String name;
     private String description;
     private Integer creditHours;
-    private DepartmentDTO department;
     private List<StudentDTO> students;
 }

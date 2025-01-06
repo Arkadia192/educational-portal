@@ -3,7 +3,9 @@ package com.berk.education_portal.service;
 import com.berk.education_portal.dto.listing.StudentDTO;
 import com.berk.education_portal.dto.request.StudentRequestDTO;
 import com.berk.education_portal.dto.response.StudentDetailDTO;
+import com.berk.education_portal.entity.Course;
 import com.berk.education_portal.entity.Student;
+import com.berk.education_portal.repository.CourseRepository;
 import com.berk.education_portal.repository.StudentRepository;
 import com.berk.education_portal.util.ObjectConverter;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class StudentService {
     private final StudentRepository studentRepository;
+    private final CourseRepository courseRepository;
 
     public Page<StudentDTO> getAllStudents(Pageable pageable) {
         return studentRepository.findAll(pageable)
@@ -30,8 +33,10 @@ public class StudentService {
         return ObjectConverter.convertStudentToDetailDTO(student);
     }
 
-    public StudentDTO createStudent(StudentRequestDTO studentRequestDTO) {
-        Student student = ObjectConverter.convertStudentRequestToEntity(studentRequestDTO);
+    public StudentDTO createStudent(StudentRequestDTO studentRequestDTO) throws Exception {
+        Course course = courseRepository.findById(studentRequestDTO.getCourseId())
+                .orElseThrow(() -> new Exception("Course not found"));
+        Student student = ObjectConverter.convertStudentRequestToEntity(studentRequestDTO, course);
         Student savedStudent = studentRepository.save(student);
         return ObjectConverter.convertStudentToListingDTO(savedStudent);
     }

@@ -9,5 +9,4 @@ public class CourseRequestDTO {
     private String name;
     private String description;
     private Integer creditHours;
-    private Long departmentId;
 }

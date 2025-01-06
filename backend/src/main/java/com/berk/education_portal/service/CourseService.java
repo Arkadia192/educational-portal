@@ -34,10 +34,7 @@ public class CourseService {
     }
 
     public CourseDTO createCourse(CourseRequestDTO courseRequestDTO) throws Exception {
-        Department department = departmentRepository.findById(courseRequestDTO.getDepartmentId())
-                .orElseThrow(() -> new Exception("Department not found"));
-
-        Course course = ObjectConverter.convertCourseRequestToEntity(courseRequestDTO, department);
+        Course course = ObjectConverter.convertCourseRequestToEntity(courseRequestDTO);
         Course savedCourse = courseRepository.save(course);
         return ObjectConverter.convertCourseToListingDTO(savedCourse);
     }
@@ -53,11 +50,6 @@ public class CourseService {
         }
         if (courseRequestDTO.getCreditHours() != null) {
             course.setCreditHours(courseRequestDTO.getCreditHours());
-        }
-        if (courseRequestDTO.getDepartmentId() != null) {
-            if (departmentRepository.existsById(courseRequestDTO.getDepartmentId())) {
-                course.setDepartment(departmentRepository.getById(courseRequestDTO.getDepartmentId()));
-            }
         }
 
         Course savedCourse = courseRepository.save(course);

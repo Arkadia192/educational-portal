@@ -11,5 +11,6 @@ public class StudentRequestDTO {
     private String lastName;
     private String email;
     private StudentStatus status;
+    private Long courseId;
 }
 

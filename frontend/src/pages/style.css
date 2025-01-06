@@ -1,161 +1,112 @@
-/* src/styles.css or a specific CSS file */
-
-/* Centering everything on the page */
 .container {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Table styling */
-.table {
-    margin-bottom: 0;
+table {
+    width: 100%;
     border-collapse: collapse;
 }
 
-.table-bordered {
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
+th, td {
+    padding: 12px;
+    text-align: left;
 }
 
-.table-hover tbody tr:hover {
-    background-color: #f1f1f1;
+th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #dcdcdc;
     cursor: pointer;
 }
 
-.table-striped tbody tr:nth-child(odd) {
-    background-color: #f9f9f9;
-}
-
-.thead-dark th {
-    background-color: #343a40;
-    color: white;
-    font-size: 18px;
-}
-
-th, td {
-    padding: 12px 15px;
-    font-size: 16px;
-}
-
-/* Making the table more defined */
-.table td, .table th {
-    border: 1px solid #ddd;
-    text-align: center;
-}
-
-/* Make the table rows clickable */
 .clickable-row {
     cursor: pointer;
 }
 
-/* Pagination styling */
-.pagination-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.pagination-container .btn {
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    padding: 8px 16px;
-    font-size: 16px;
-    margin: 5px;
-}
-
-.pagination-container .btn:disabled {
-    background-color: #e0e0e0;
-}
-
-.pagination-container .btn:hover {
-    background-color: #0056b3;
-}
-
-/* Employee/Student list styling */
-.employee-list {
-    list-style-type: none;
-    padding: 0;
-    font-size: 16px;
-}
-
-.employee-item {
-    cursor: pointer;
-    padding: 8px 10px;
-    border: 1px solid #ddd;
-    margin: 5px 0;
-    border-radius: 5px;
+.clickable-row td {
     transition: background-color 0.3s;
-    font-size: 16px;
 }
 
-.employee-item:hover {
-    background-color: #f1f1f1;
+table .action-buttons {
+    display: flex;
+    justify-content: space-around;
 }
 
-.employee-item:active {
-    background-color: #007bff;
-    color: white;
+button {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-/* Modal overlay styling */
-.modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+button:hover {
+    opacity: 0.8;
+}
+
+.page-navigation {
     display: flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 20px;
 }
 
-/* Adjust the modal content for better readability */
+.page-navigation button {
+    margin: 0 10px;
+}
+
 .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 600px;
-    width: 100%;
+    margin-top: 20px;
 }
 
-/* Centering and responsive design */
-.container {
-    max-width: 1200px;
-  }
-  
-  /* Hover effect for the expanded list items */
-  .expanded-data-item:hover {
-    background-color: #f1f1f1;
+.list-group-item-action {
     cursor: pointer;
-  }
-  
-  /* Styling for pagination buttons */
-  .pagination-container button {
-    padding: 8px 16px;
-    border-radius: 5px;
-    font-weight: bold;
-  }
-  
-  /* Styling for expanded data list */
-  .expanded-data-list {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .expanded-data-item {
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .expanded-data-item:last-child {
-    border-bottom: none;
-  }
-  
-  /* Adding hover effect on table rows */
-  .clickable-row:hover {
+    padding: 15px; /* Increased padding for easier click */
+    font-size: 16px; /* Increased font size */
+    transition: background-color 0.3s;
+    border-radius: 5px; /* Rounded corners */
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef;
+}
+
+.expanded-row {
     background-color: #f9f9f9;
-  }
-  
+}
+
+.page-navigation .btn {
+    width: 120px;
+}
+
+table tbody .student, table tbody .employee {
+    background-color: #e9f7ef;
+    font-weight: bold;
+}
+
+table tbody .employee {
+    background-color: #e9f7ff;
+}
+
+table tbody .student, table tbody .employee {
+    display: block; /* Makes each item take up the full row width */
+    width: 100%; /* Ensures each list item stretches across */
+    margin: 5px 0; /* Adds space between list items */
+}
+
+.list-group-item-action {
+    width: 100%; /* Ensures items take up full width of their container */
+    margin: 5px 0; /* Adds space between items */
+    padding: 15px; /* Adds more padding to make items easier to click */
+}
+
+.list-group-item-action:hover {
+    background-color: #e9ecef; /* Slightly darker hover effect */
+}
+

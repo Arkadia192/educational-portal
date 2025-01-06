@@ -17,6 +17,7 @@ import com.berk.education_portal.entity.Department;
 import com.berk.education_portal.entity.Employee;
 import com.berk.education_portal.entity.Student;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ObjectConverter {
@@ -44,12 +45,6 @@ public class ObjectConverter {
                 department.getEmployees().stream()
                         .map(EmployeeDTO::new)
                         .collect(Collectors.toList()));
-
-        departmentDetailDTO.setCourses(
-                department.getCourses().stream()
-                        .map(CourseDTO::new)
-                        .collect(Collectors.toList())
-        );
 
         return departmentDetailDTO;
     }
@@ -85,12 +80,11 @@ public class ObjectConverter {
 
     // Course conversions:
 
-    public static Course convertCourseRequestToEntity(CourseRequestDTO courseRequestDTO, Department department) {
+    public static Course convertCourseRequestToEntity(CourseRequestDTO courseRequestDTO) {
         Course course = new Course();
         course.setName(courseRequestDTO.getName());
         course.setDescription(courseRequestDTO.getDescription());
         course.setCreditHours(courseRequestDTO.getCreditHours());
-        course.setDepartment(department);
         return course;
     }
 
@@ -104,7 +98,6 @@ public class ObjectConverter {
         courseDetailDTO.setName(course.getName());
         courseDetailDTO.setDescription(course.getDescription());
         courseDetailDTO.setCreditHours(course.getCreditHours());
-        courseDetailDTO.setDepartment(convertDepartmentToListingDTO(course.getDepartment()));
 
         courseDetailDTO.setStudents(
                 course.getStudents().stream()
@@ -117,12 +110,13 @@ public class ObjectConverter {
 
     // Student conversions:
 
-    public static Student convertStudentRequestToEntity(StudentRequestDTO studentRequestDTO) {
+    public static Student convertStudentRequestToEntity(StudentRequestDTO studentRequestDTO, Course course) {
         Student student = new Student();
         student.setFirstName(studentRequestDTO.getFirstName());
         student.setLastName(studentRequestDTO.getLastName());
         student.setEmail(studentRequestDTO.getEmail());
         student.setStatus(studentRequestDTO.getStatus());
+        student.setCourses(List.of(course));
         return student;
     }
 
