@@ -36,6 +36,27 @@ public class StudentService {
         return ObjectConverter.convertStudentToListingDTO(savedStudent);
     }
 
+    public StudentDTO updateStudent(Long id, StudentRequestDTO studentRequestDTO) throws Exception {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new Exception("Student not found"));
+
+        if (studentRequestDTO.getFirstName() != null) {
+            student.setFirstName(studentRequestDTO.getFirstName());
+        }
+        if (studentRequestDTO.getLastName() != null) {
+            student.setLastName(studentRequestDTO.getLastName());
+        }
+        if (studentRequestDTO.getEmail() != null) {
+            student.setEmail(studentRequestDTO.getEmail());
+        }
+        if (studentRequestDTO.getStatus() != null) {
+            student.setStatus(studentRequestDTO.getStatus());
+        }
+
+        Student savedStudent = studentRepository.save(student);
+        return new StudentDTO(savedStudent);
+    }
+
+
     public void deleteStudent(Long id) throws Exception {
         if (!studentRepository.existsById(id)) {
             throw new Exception("Student Not Found");

@@ -42,6 +42,35 @@ public class EmployeeService {
         return ObjectConverter.convertEmployeeToListingDTO(savedEmployee);
     }
 
+    public EmployeeDTO updateEmployee(Long id, EmployeeRequestDTO employeeRequestDTO) throws Exception {
+        Employee employee = employeeRepository.findById(id).orElseThrow(() -> new Exception("Employee not found"));
+
+        if (employeeRequestDTO.getFirstName() != null) {
+            employee.setFirstName(employeeRequestDTO.getFirstName());
+        }
+        if (employeeRequestDTO.getLastName() != null) {
+            employee.setLastName(employeeRequestDTO.getLastName());
+        }
+        if (employeeRequestDTO.getEmail() != null) {
+            employee.setEmail(employeeRequestDTO.getEmail());
+        }
+        if (employeeRequestDTO.getPhoneNumber() != null) {
+            employee.setPhoneNumber(employeeRequestDTO.getPhoneNumber());
+        }
+        if (employeeRequestDTO.getRole() != null) {
+            employee.setRole(employeeRequestDTO.getRole());
+        }
+        if (employeeRequestDTO.getDepartmentId() != null) {
+            if (departmentRepository.existsById(employeeRequestDTO.getDepartmentId())) {
+                employee.setDepartment(departmentRepository.getById(employeeRequestDTO.getDepartmentId()));
+            }
+        }
+
+        Employee savedEmployee = employeeRepository.save(employee);
+        return new EmployeeDTO(savedEmployee);
+    }
+
+
     public void deleteEmployee(Long id) throws Exception {
         if (!employeeRepository.existsById(id)) {
             throw new Exception("Department Not Found");

@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/students")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -35,6 +33,12 @@ public class StudentController {
     @PostMapping
     public ResponseEntity<StudentDTO> createStudent(@RequestBody @Valid StudentRequestDTO studentRequestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(studentRequestDTO));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentDTO> updateStudent(@PathVariable Long id, @RequestBody StudentRequestDTO studentRequestDTO) throws Exception {
+        StudentDTO updatedStudent = studentService.updateStudent(id, studentRequestDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedStudent);
     }
 
     @DeleteMapping("/{id}")
