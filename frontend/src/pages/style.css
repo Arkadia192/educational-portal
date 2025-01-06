@@ -45,6 +45,17 @@ button {
     padding: 5px 10px;
     font-size: 14px;
     cursor: pointer;
+    border-radius: 10px;
+    margin-left: 2px;
+    margin-bottom: 2px;
+}
+
+.create-button {
+    background-color: green;
+}
+
+.delete-button {
+    background-color: red;
 }
 
 button:hover {
@@ -110,3 +121,50 @@ table tbody .student, table tbody .employee {
     background-color: #e9ecef; /* Slightly darker hover effect */
 }
 
+/* Center pagination on the screen (both horizontally and vertically) */
+.d-flex.justify-content-center.align-items-center {
+
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    margin-top: 0; /* Remove the margin-top */
+  }
+  
+  /* Button styling */
+  .btn-pagination {
+    background: linear-gradient(90deg, #4e73df, #1cc88a);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .btn-pagination:hover {
+    background: linear-gradient(90deg, #1cc88a, #4e73df);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  /* Disabled button */
+  .btn-pagination:disabled {
+    background: #d1d3e2;
+    color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  /* Info text (page number) */
+  .page-info {
+    font-size: 16px;
+    color: #555;
+    font-weight: 500;
+  }
+  
+  /* Add a margin to the icons for separation */
+  i {
+    font-size: 20px;
+  }
+  

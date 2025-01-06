@@ -3,13 +3,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import DepartmentList from "./pages/DepartmentList";
 import CourseList from "./pages/CourseList";
+import WelcomePage from "./components/WelcomePage";
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<DepartmentList />} />
+          <Route index element={<WelcomePage />} />
+          <Route path="/departments" element={<DepartmentList />} />
           <Route path="/courses" element={<CourseList />} />
         </Route>
       </Routes>

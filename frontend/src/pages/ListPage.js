@@ -13,14 +13,13 @@ import {
   deleteDepartment,
   deleteCourse,
   deleteEmployee,
-  deleteStudent
+  deleteStudent,
 } from "../services/api";
 import "./style.css";
 
 const ListPage = ({
   title,
   apiFetchFunction,
-  apiCreateFunction,
   apiFetchDetailFunction,
   expandDataKey,
   expandItemKey,
@@ -93,17 +92,21 @@ const ListPage = ({
 
   const handleEmployeeDeleteClick = (id) => {
     deleteEmployee(id)
-      .then(() =>
-        setItems((prevItems) => prevItems.filter((item) => item.id !== id))
-      )
+      .then(() => {
+        setExpandedData((prevData) =>
+          prevData.filter((data) => data.id !== id)
+        );
+      })
       .catch((error) => console.error("Error deleting employee:", error));
   };
 
   const handleStudentDeleteClick = (id) => {
     deleteStudent(id)
-      .then(() =>
-        setItems((prevItems) => prevItems.filter((item) => item.id !== id))
-      )
+      .then(() => {
+        setExpandedData((prevData) =>
+          prevData.filter((data) => data.id !== id)
+        );
+      })
       .catch((error) => console.error("Error deleting student:", error));
   };
 
@@ -125,6 +128,12 @@ const ListPage = ({
       setItems((prevItems) =>
         prevItems.map((item) =>
           item.id === updatedItem.id ? updatedItem : item
+        )
+      );
+
+      setExpandedData((prevData) =>
+        prevData.map((data) =>
+          data.id === updatedItem.id ? updatedItem : data
         )
       );
     }
@@ -156,7 +165,10 @@ const ListPage = ({
       <div className="col-12 col-md-10 mx-auto">
         <h2 className="mb-4 text-center">{title}</h2>
 
-        <button onClick={handleCreateClick} className="btn btn-success mb-3">
+        <button
+          onClick={handleCreateClick}
+          className="create-button btn btn-success mb-3"
+        >
           + Add {title}
         </button>
 
@@ -183,21 +195,19 @@ const ListPage = ({
             />
           ) : null)}
 
-        {employeeUpdate &&
-          (
-            <UpdateEmployeeForm
+        {employeeUpdate && (
+          <UpdateEmployeeForm
             employee={employeeData}
             onClose={handleUpdateClose}
-            />
-          )}
-        
-        {studentUpdate &&
-          (
-            <UpdateStudentForm
+          />
+        )}
+
+        {studentUpdate && (
+          <UpdateStudentForm
             student={studentData}
             onClose={handleUpdateClose}
-            />
-          )}
+          />
+        )}
 
         {showEmployeeModal && (
           <CreateEmployeeForm
@@ -240,14 +250,14 @@ const ListPage = ({
                       </button>
                       <button
                         onClick={() => handleDeleteClick(item.id)}
-                        className="btn btn-sm btn-outline-danger mx-1"
+                        className="delete-button btn btn-sm btn-outline-danger mx-1"
                       >
                         🗑 Delete
                       </button>
                       {title === "Departments" && (
                         <button
                           onClick={() => handleAddEmployeeClick(item.id)} // Add employee button
-                          className="btn btn-sm btn-outline-info mx-1"
+                          className="create-button btn btn-sm btn-outline-info mx-1"
                         >
                           ➕ Add Employee
                         </button>
@@ -272,35 +282,37 @@ const ListPage = ({
                               <li
                                 key={data.id}
                                 className="list-group-item list-group-item-action"
+                                onClick={() => setSelectedItem(data)} // Open modal on click
+                                style={{ cursor: "pointer" }} // Indicate it's clickable
                               >
                                 {data.firstName ? data.firstName : data.name}
                                 <button
-                                  onClick={() => {
+                                  onClick={(e) => {
+                                    e.stopPropagation(); // Prevent modal opening when clicking this button
                                     if (expandItemKey === "Students") {
-                                        console.log(data);
-                                        handleStudentUpdateClick(data);
-                                        setStudentData(data);
-                                        setStudentUpdate(true);
-                                    }else {
-                                        handleEmployeeUpdateClick(data);
-                                        setEmployeeData(data);
-                                        setEmployeeUpdate(true);
+                                      handleStudentUpdateClick(data);
+                                      setStudentData(data);
+                                      setStudentUpdate(true);
+                                    } else {
+                                      handleEmployeeUpdateClick(data);
+                                      setEmployeeData(data);
+                                      setEmployeeUpdate(true);
                                     }
-                                }}
+                                  }}
                                   className="btn btn-sm btn-outline-primary mx-1 float-end"
                                 >
                                   ✏ Edit
                                 </button>
                                 <button
-                                  onClick={() => {
+                                  onClick={(e) => {
+                                    e.stopPropagation(); // Prevent modal opening when clicking this button
                                     if (expandItemKey === "Students") {
-                                        handleStudentDeleteClick(data.id);
-                                    }else {
-                                        handleEmployeeDeleteClick(data.id);
+                                      handleStudentDeleteClick(data.id);
+                                    } else {
+                                      handleEmployeeDeleteClick(data.id);
                                     }
-                                  }
-                                }
-                                  className="btn btn-sm btn-outline-danger mx-1 float-end"
+                                  }}
+                                  className="delete-button btn btn-sm btn-outline-danger mx-1 float-end"
                                 >
                                   🗑 Delete
                                 </button>
@@ -334,25 +346,29 @@ const ListPage = ({
             />
           ))}
 
-        <div className="d-flex justify-content-center mt-3">
-          <button
-            className="btn btn-outline-primary mx-2"
-            disabled={currentPage === 0}
-            onClick={() => setCurrentPage((prev) => prev - 1)}
-          >
-            ⬅ Previous
-          </button>
-          <span className="align-self-center">
-            Page {currentPage + 1} of {totalPages}
-          </span>
-          <button
-            className="btn btn-outline-primary mx-2"
-            disabled={currentPage + 1 === totalPages}
-            onClick={() => setCurrentPage((prev) => prev + 1)}
-          >
-            Next ➡
-          </button>
-        </div>
+<div className="d-flex justify-content-center align-items-center mt-5">
+  <button
+    className="btn btn-pagination mx-2 d-flex align-items-center"
+    disabled={currentPage === 0}
+    onClick={() => setCurrentPage((prev) => prev - 1)}
+  >
+    <i className="bi bi-arrow-left-circle-fill me-2"></i> {/* Left Arrow Icon */}
+    Previous
+  </button>
+  <span className="page-info mx-3">
+    Page {currentPage + 1} of {totalPages}
+  </span>
+  <button
+    className="btn btn-pagination mx-2 d-flex align-items-center"
+    disabled={currentPage + 1 === totalPages}
+    onClick={() => setCurrentPage((prev) => prev + 1)}
+  >
+    Next
+    <i className="bi bi-arrow-right-circle-fill ms-2"></i> {/* Right Arrow Icon */}
+  </button>
+</div>
+
+
       </div>
     </div>
   );

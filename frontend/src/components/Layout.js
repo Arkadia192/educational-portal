@@ -10,7 +10,8 @@ const Layout = () => {
         <aside className="sidebar">
           <nav>
             <ul>
-              <li><Link to="/">Departments & Employees</Link></li>
+              <li><Link to="/">Welcome</Link></li>
+              <li><Link to="/departments">Departments & Employees</Link></li>
               <li><Link to="/courses">Courses & Students</Link></li>
             </ul>
           </nav>
