@@ -31,10 +31,7 @@ public class ObjectConverter {
     }
 
     public static DepartmentDTO convertDepartmentToListingDTO(Department department) {
-        DepartmentDTO departmentDTO = new DepartmentDTO();
-        departmentDTO.setId(department.getId());
-        departmentDTO.setName(department.getName());
-        return departmentDTO;
+        return new DepartmentDTO(department);
     }
 
     public static DepartmentDetailDTO convertDepartmentToDetailDTO(Department department) {

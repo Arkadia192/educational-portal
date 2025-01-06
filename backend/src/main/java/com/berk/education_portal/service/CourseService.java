@@ -9,6 +9,8 @@ import com.berk.education_portal.repository.CourseRepository;
 import com.berk.education_portal.repository.DepartmentRepository;
 import com.berk.education_portal.util.ObjectConverter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,11 +22,9 @@ public class CourseService {
     private final CourseRepository courseRepository;
     private final DepartmentRepository departmentRepository;
 
-    public List<CourseDTO> getAllCourses() {
-        return courseRepository.findAll()
-                .stream()
-                .map(ObjectConverter::convertCourseToListingDTO)
-                .collect(Collectors.toList());
+    public Page<CourseDTO> getAllCourses(Pageable pageable) {
+        return courseRepository.findAll(pageable)
+                .map(ObjectConverter::convertCourseToListingDTO);
     }
 
     public CourseDetailDTO getCourseById(Long id) {
@@ -40,6 +40,28 @@ public class CourseService {
         Course course = ObjectConverter.convertCourseRequestToEntity(courseRequestDTO, department);
         Course savedCourse = courseRepository.save(course);
         return ObjectConverter.convertCourseToListingDTO(savedCourse);
+    }
+
+    public CourseDTO updateCourse(Long id, CourseRequestDTO courseRequestDTO) throws Exception {
+        Course course = courseRepository.findById(id).orElseThrow(() -> new Exception("Course not found"));
+
+        if (courseRequestDTO.getName() != null) {
+            course.setName(courseRequestDTO.getName());
+        }
+        if (courseRequestDTO.getDescription() != null) {
+            course.setDescription(courseRequestDTO.getDescription());
+        }
+        if (courseRequestDTO.getCreditHours() != null) {
+            course.setCreditHours(courseRequestDTO.getCreditHours());
+        }
+        if (courseRequestDTO.getDepartmentId() != null) {
+            if (departmentRepository.existsById(courseRequestDTO.getDepartmentId())) {
+                course.setDepartment(departmentRepository.getById(courseRequestDTO.getDepartmentId()));
+            }
+        }
+
+        Course savedCourse = courseRepository.save(course);
+        return new CourseDTO(savedCourse);
     }
 
     public void deleteCourse(Long id) throws Exception {

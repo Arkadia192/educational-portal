@@ -10,10 +10,12 @@ public class CourseDTO {
     private Long id;
     private String name;
     private Integer creditHours;
+    private String description;
 
     public CourseDTO(Course course) {
         id = course.getId();
         name = course.getName();
+        description = course.getDescription();
         creditHours = course.getCreditHours();
     }
 }

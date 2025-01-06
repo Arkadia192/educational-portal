@@ -6,11 +6,11 @@ import com.berk.education_portal.dto.response.DepartmentDetailDTO;
 import com.berk.education_portal.service.DepartmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/departments")
@@ -21,8 +21,8 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @GetMapping
-    public ResponseEntity<List<DepartmentDTO>> getAllDepartments() {
-        return ResponseEntity.ok(departmentService.getAllDepartments());
+    public Page<DepartmentDTO> getAllDepartments(Pageable pageable) {
+        return departmentService.getAllDepartments(pageable); // ✅ Return paginated response
     }
 
     // TODO: Handle exception more elegantly
@@ -34,6 +34,12 @@ public class DepartmentController {
     @PostMapping
     public ResponseEntity<DepartmentDTO> createDepartment(@RequestBody @Valid DepartmentRequestDTO departmentRequestDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(departmentService.createDepartment(departmentRequestDTO));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<DepartmentDTO> updateDepartment(@PathVariable Long id, @RequestBody DepartmentRequestDTO departmentRequestDTO) throws Exception {
+        DepartmentDTO updatedDepartment = departmentService.updateDepartment(id, departmentRequestDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedDepartment);
     }
 
     // TODO: Handle exception more elegantly

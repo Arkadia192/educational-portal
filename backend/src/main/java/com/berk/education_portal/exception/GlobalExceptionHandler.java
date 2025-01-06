@@ -11,6 +11,6 @@ public class GlobalExceptionHandler {
     // TODO: add different exceptions.
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGlobalException(Exception ex) {
-        return new ResponseEntity<String>("Something went horribly wrong!", HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<String>(ex.toString(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

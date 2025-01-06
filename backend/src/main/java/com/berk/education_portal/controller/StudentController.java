@@ -6,6 +6,8 @@ import com.berk.education_portal.dto.response.StudentDetailDTO;
 import com.berk.education_portal.service.StudentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +23,8 @@ public class StudentController {
     private final StudentService studentService;
 
     @GetMapping
-    public ResponseEntity<List<StudentDTO>> getAllStudents() {
-        return ResponseEntity.ok(studentService.getAllStudents());
+    public Page<StudentDTO> getAllStudents(Pageable pageable) {
+        return studentService.getAllStudents(pageable);
     }
 
     @GetMapping("/{id}")

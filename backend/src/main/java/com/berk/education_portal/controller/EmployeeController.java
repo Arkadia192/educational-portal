@@ -6,6 +6,8 @@ import com.berk.education_portal.dto.response.EmployeeDetailDTO;
 import com.berk.education_portal.service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +22,8 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping
-    public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
-        return ResponseEntity.ok(employeeService.getAllEmployees());
+    public Page<EmployeeDTO> getAllEmployees(Pageable pageable) {
+        return employeeService.getAllEmployees(pageable);
     }
 
     @GetMapping("/{id}")

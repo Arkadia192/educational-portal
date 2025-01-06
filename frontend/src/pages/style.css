@@ -1,0 +1,161 @@
+/* src/styles.css or a specific CSS file */
+
+/* Centering everything on the page */
+.container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Table styling */
+.table {
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.thead-dark th {
+    background-color: #343a40;
+    color: white;
+    font-size: 18px;
+}
+
+th, td {
+    padding: 12px 15px;
+    font-size: 16px;
+}
+
+/* Making the table more defined */
+.table td, .table th {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Make the table rows clickable */
+.clickable-row {
+    cursor: pointer;
+}
+
+/* Pagination styling */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination-container .btn {
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    padding: 8px 16px;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.pagination-container .btn:disabled {
+    background-color: #e0e0e0;
+}
+
+.pagination-container .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Employee/Student list styling */
+.employee-list {
+    list-style-type: none;
+    padding: 0;
+    font-size: 16px;
+}
+
+.employee-item {
+    cursor: pointer;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 16px;
+}
+
+.employee-item:hover {
+    background-color: #f1f1f1;
+}
+
+.employee-item:active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Modal overlay styling */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Adjust the modal content for better readability */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    width: 100%;
+}
+
+/* Centering and responsive design */
+.container {
+    max-width: 1200px;
+  }
+  
+  /* Hover effect for the expanded list items */
+  .expanded-data-item:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  /* Styling for pagination buttons */
+  .pagination-container button {
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  /* Styling for expanded data list */
+  .expanded-data-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .expanded-data-item {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .expanded-data-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* Adding hover effect on table rows */
+  .clickable-row:hover {
+    background-color: #f9f9f9;
+  }
+  

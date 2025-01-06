@@ -7,6 +7,8 @@ import com.berk.education_portal.entity.Student;
 import com.berk.education_portal.repository.StudentRepository;
 import com.berk.education_portal.util.ObjectConverter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +19,9 @@ import java.util.stream.Collectors;
 public class StudentService {
     private final StudentRepository studentRepository;
 
-    public List<StudentDTO> getAllStudents() {
-        return studentRepository.findAll()
-                .stream()
-                .map(ObjectConverter::convertStudentToListingDTO)
-                .collect(Collectors.toList());
+    public Page<StudentDTO> getAllStudents(Pageable pageable) {
+        return studentRepository.findAll(pageable)
+                .map(ObjectConverter::convertStudentToListingDTO);
     }
 
     public StudentDetailDTO getStudentById(Long id) throws Exception {

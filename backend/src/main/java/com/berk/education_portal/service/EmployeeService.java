@@ -9,6 +9,8 @@ import com.berk.education_portal.repository.DepartmentRepository;
 import com.berk.education_portal.repository.EmployeeRepository;
 import com.berk.education_portal.util.ObjectConverter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,11 +22,9 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final DepartmentRepository departmentRepository;
 
-    public List<EmployeeDTO> getAllEmployees() {
-        return employeeRepository.findAll()
-                .stream()
-                .map(ObjectConverter::convertEmployeeToListingDTO)
-                .collect(Collectors.toList());
+    public Page<EmployeeDTO> getAllEmployees(Pageable pageable) {
+        return employeeRepository.findAll(pageable)
+                .map(ObjectConverter::convertEmployeeToListingDTO);
     }
 
     public EmployeeDetailDTO getEmployeeById(Long id) throws Exception {
